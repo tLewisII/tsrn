@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "jsx": "react",
+        "outDir": "build",
+        "rootDir": "source",
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "preserveConstEnums": true,
+        "allowJs": true,
+        "pretty": true,
+        "sourceMap": false,
+        "noImplicitReturns": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "experimentalDecorators": true
+    },
+    "filesGlob": [
+        "typings/index.d.ts",
+        "source/**/*.ts",
+        "source/**/*.tsx"
+    ],
+    "types": [
+        "node",
+        "core-js"
+    ],
+    "exclude": [
+        "node_modules",
+        "build",
+        "./source/files"
+    ],
+    "compileOnSave": false
+}

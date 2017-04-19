@@ -1,0 +1,29 @@
+{
+  "name": "tsrn",
+  "version": "0.1.0",
+  "description": "A single command to setup a React Native project with Typescript.",
+  "main": "index.js",
+  "author": "Terry Lewis II",
+  "license": "MIT",
+  "bin": {
+    "ts-gen": "./build/index.js"
+  },
+  "files": [
+    "source/files",
+    "build"
+  ],
+  "dependencies": {},
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "tslint src/**/*.ts",
+    "prebuild": "rm -rf build",
+    "build": "tsc",
+    "watch": "tsc -p . --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.12",
+    "rimraf": "^2.6.1",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2"
+  }
+}
