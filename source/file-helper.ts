@@ -4,6 +4,12 @@ import * as path from 'path'
 
 export class FileHelper extends Object {
 
+    versionNumber = async () => {
+        let dir = path.parse(__dirname).dir
+        let packageJson = await this.getFile(path.join(dir, 'package.json'))
+        return packageJson['version'] as string
+    }
+
     pathForFile = (name: string) => {
         let dir = path.parse(__dirname).dir
         return path.join(dir, 'source', "files", name)
