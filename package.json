@@ -6,7 +6,7 @@
   "author": "Terry Lewis II",
   "license": "MIT",
   "bin": {
-    "ts-gen": "./build/index.js"
+    "tsrn": "./build/index.js"
   },
   "files": [
     "source/files",
