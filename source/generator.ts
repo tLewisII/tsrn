@@ -25,7 +25,8 @@ let files = {
     tsconfig: 'tsconfig.json',
     tasks: 'tasks.json',
     launch: 'launch.json',
-    settings: 'settings.json'
+    settings: 'settings.json',
+    extensions: 'extensions.json'
 }
 
 export class ProjectGenerator extends Object {
@@ -65,6 +66,7 @@ export class ProjectGenerator extends Object {
         this.fileHelper.copyFile(this.fileHelper.pathForFile(files.tasks), path.join('.vscode', files.tasks))
         this.fileHelper.copyFile(this.fileHelper.pathForFile(files.launch), path.join('.vscode', files.launch))
         this.fileHelper.copyFile(this.fileHelper.pathForFile(files.settings), path.join('.vscode', files.settings))
+        this.fileHelper.copyFile(this.fileHelper.pathForFile(files.extensions), path.join('.vscode', files.extensions))
     }
 
     private _writeSourceFiles = async (dirName: string) => {
