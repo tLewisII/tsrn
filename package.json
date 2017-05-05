@@ -8,6 +8,12 @@
   "bin": {
     "tsrn": "./build/index.js"
   },
+  "keywords": [
+    "react-native",
+    "typescript",
+    "react",
+    "visual studio code"
+  ],
   "files": [
     "source/files",
     "build"
