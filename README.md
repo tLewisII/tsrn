@@ -3,7 +3,7 @@ A single command to setup a React Native project with Typescript.
 
 
 # Installation
-`npm install -g` is all you have to do. tsrn has no dependencies.
+`npm install -g tsrn` is all you have to do. tsrn has no dependencies.
 
 # Usage
 `tsrn MyProject` will setup a new React Native project for you that is ready to be built with Typescript.
