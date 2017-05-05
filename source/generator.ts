@@ -5,17 +5,36 @@ let packages = {
     scripts: {
         "start": "node node_modules/react-native/local-cli/cli.js start --skipflow",
         "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-        "test": "jest --coverage",
+        "test": "jest",
         "lint": "tslint source/**/*.ts",
         "preBuild": "yarn rimraf build",
         "build": "tsc",
         "debugPreBuild": "yarn preBuild && yarn build && yarn watch",
         "watch": "tsc -p . --watch"
+    },
+    jest:
+    {
+        preset: "react-native",
+        moduleFileExtensions: [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        transform: {
+            "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+            ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+        },
+        testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+        testPathIgnorePatterns: [
+            "\\.snap$",
+            "<rootDir>/node_modules/"
+        ],
+        cacheDirectory: ".jest/cache"
     }
 }
 
 let commands = {
-    installDevDependencies: 'yarn add typescript rimraf @types/react @types/react-native tslint -D',
+    installDevDependencies: 'yarn add typescript rimraf @types/react @types/react-native tslint ts-jest jest-react-native -D',
     installRN: 'react-native init'
 }
 
@@ -59,6 +78,7 @@ export class ProjectGenerator extends Object {
     private _writeConfigFiles = async () => {
         let packageJson = await this.fileHelper.getFile(files.package)
         packageJson['scripts'] = packages.scripts
+        packageJson['jest'] = packages.jest
         this.fileHelper.writeFile(files.package, JSON.stringify(packageJson))
 
         this.fileHelper.copyFile(this.fileHelper.pathForFile(files.tslint), files.tslint)
