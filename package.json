@@ -1,6 +1,6 @@
 {
   "name": "tsrn",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A single command to setup a React Native project with Typescript.",
   "main": "index.js",
   "author": "Terry Lewis II",
