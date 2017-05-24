@@ -22,26 +22,21 @@ let packages = {
         "watch": "tsc -p . --watch"
     },
     jest: {
-        preset: "react-native",
-        moduleFileExtensions: [
+        "preset": "react-native",
+        "transform": {
+            "^.+\\.js$": "./node_modules/babel-jest",
+            ".(ts|tsx)": "./node_modules/ts-jest/preprocessor.js"
+        },
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+        "moduleFileExtensions": [
             "ts",
             "tsx",
             "js"
-        ],
-        transform: {
-            "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-            ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-        },
-        testRegex: "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-        testPathIgnorePatterns: [
-            "\\.snap$",
-            "<rootDir>/node_modules/"
-        ],
-        cacheDirectory: ".jest/cache"
+        ]
     }
 };
 let commands = {
-    installDevDependencies: 'yarn add typescript rimraf @types/react @types/react-native tslint ts-jest jest-react-native -D',
+    installDevDependencies: 'yarn add typescript rimraf @types/jest @types/react @types/react-native tslint ts-jest jest-react-native -D',
     installRN: 'react-native init'
 };
 let files = {
@@ -51,7 +46,12 @@ let files = {
     tasks: 'tasks.json',
     launch: 'launch.json',
     settings: 'settings.json',
-    extensions: 'extensions.json'
+    extensions: 'extensions.json',
+    babelrc: '.babelrc',
+    indexiOS: 'index.ios.js',
+    indexAndroid: 'index.android.js',
+    indexiOSTest: 'index.ios.test.ts',
+    indexAndroidTest: 'index.android.test.ts'
 };
 class ProjectGenerator extends Object {
     constructor() {
@@ -81,6 +81,7 @@ class ProjectGenerator extends Object {
             this.fileHelper.copyFile(this.fileHelper.pathForFile(files.launch), path.join('.vscode', files.launch));
             this.fileHelper.copyFile(this.fileHelper.pathForFile(files.settings), path.join('.vscode', files.settings));
             this.fileHelper.copyFile(this.fileHelper.pathForFile(files.extensions), path.join('.vscode', files.extensions));
+            this.fileHelper.copyFile(this.fileHelper.pathForFile(files.babelrc), files.babelrc);
         });
         this._writeSourceFiles = (dirName) => __awaiter(this, void 0, void 0, function* () {
             let appDelegate = yield this.fileHelper.getFileString(this.fileHelper.pathForFile('AppDelegate.m'));
@@ -96,11 +97,15 @@ class ProjectGenerator extends Object {
             indexAndroidModified = indexAndroidModified.replace('{moduleName}', dirName);
             indexAndroidModified = indexAndroidModified.replace('{moduleName}', dirName);
             this.fileHelper.writeFile(path.join('source', 'index.android.tsx'), indexAndroidModified);
+            this.fileHelper.copyFile(this.fileHelper.pathForFile(files.indexiOS), files.indexiOS);
+            this.fileHelper.copyFile(this.fileHelper.pathForFile(files.indexAndroid), files.indexAndroid);
+            this.fileHelper.copyFile(this.fileHelper.pathForFile(files.indexiOSTest), path.join('__tests__', files.indexiOSTest));
+            this.fileHelper.copyFile(this.fileHelper.pathForFile(files.indexAndroidTest), path.join('__tests__', files.indexAndroidTest));
         });
         this._removeOldFiles = () => __awaiter(this, void 0, void 0, function* () {
-            this.fileHelper.removeFile('index.ios.js');
-            this.fileHelper.removeFile('index.android.js');
             this.fileHelper.removeFile('.flowconfig');
+            this.fileHelper.removeFile(path.join('__tests__', 'index.ios.js'));
+            this.fileHelper.removeFile(path.join('__tests__', 'index.android.js'));
         });
         this.fileHelper = new file_helper_1.FileHelper();
     }

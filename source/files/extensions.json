@@ -5,6 +5,8 @@
         "christian-kohler.npm-intellisense",
         "eg2.tslint",
         "christian-kohler.path-intellisense",
-        "vsmobile.vscode-react-native"
+        "vsmobile.vscode-react-native",
+        "Orta.vscode-jest",
+        "streetsidesoftware.code-spell-checker"
     ]
 }
